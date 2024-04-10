@@ -1,0 +1,33 @@
+{
+  "Routes": [
+    //Authen
+    {
+      "UpstreamPathTemplate": "api/Account",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authenticationwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "api/Account"
+    },
+    //Food
+    {
+      "UpstreamPathTemplate": "api/foods/search/{foodname}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "foodwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "api/foods/search/{foodname}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8000"
+  }
+}
