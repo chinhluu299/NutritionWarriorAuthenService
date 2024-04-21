@@ -1,33 +1,64 @@
 {
   "Routes": [
-    //Authen
     {
-      "UpstreamPathTemplate": "api/Account",
-      "UpstreamHttpMethod": [ "POST" ],
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/api/Auth/signin",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authenticationwebapi",
-          "Port": 8080
+          "Host": "localhost",
+          "Port": 44375
         }
       ],
-      "DownstreamPathTemplate": "api/Account"
+      "UpstreamPathTemplate": "/api/Auth/signin",
+      "UpstreamHttpMethod": [ "POST" ]
     },
-    //Food
     {
-      "UpstreamPathTemplate": "api/foods/search/{foodname}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "DownstreamScheme": "http",
+      "DownstreamPathTemplate": "/api/Auth/refreshtoken",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "foodwebapi",
-          "Port": 8080
+          "Host": "localhost",
+          "Port": 44375
         }
       ],
-      "DownstreamPathTemplate": "api/foods/search/{foodname}"
+      "UpstreamPathTemplate": "/api/Auth/refreshtoken",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/send-mail",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/send-mail",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/reset-password",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/reset-password",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/sign-up",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/sign-up",
+      "UpstreamHttpMethod": [ "POST" ]
     }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:8000"
-  }
+  ]
 }

@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using NutritionWarriorGateway.Middlewares;
 using Ocelot.DependencyInjection;
@@ -9,7 +10,7 @@ namespace NutritionWarriorGateway
 {
     public class Program
     {
-        public static async void Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
@@ -42,21 +43,24 @@ namespace NutritionWarriorGateway
            
             var app = builder.Build();
             app.UseMiddleware<RequestResponseLoggingMiddleware>();
-
-            await app.UseOcelot();
-
             // Map health check endpoints
-            app.MapHealthChecks("/hc", new HealthCheckOptions()
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecks("/liveness", new HealthCheckOptions
+                {
+                    Predicate = r => r.Name.Contains("self")
+                });
             });
 
-            app.MapHealthChecks("/liveness", new HealthCheckOptions
-            {
-                Predicate = r => r.Name.Contains("self")
-            });
+            app.UseOcelot().Wait();
 
+            app.MapGet("/", () => "Gate way ok");
             app.Run();
         }
     }
