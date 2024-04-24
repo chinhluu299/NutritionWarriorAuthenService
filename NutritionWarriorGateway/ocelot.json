@@ -1,5 +1,6 @@
 {
   "Routes": [
+    /////////////////////////Authentication////////////////////////////
     {
       "DownstreamPathTemplate": "/api/Auth/signin",
       "DownstreamScheme": "https",
@@ -10,7 +11,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/Auth/signin",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+      
     },
     {
       "DownstreamPathTemplate": "/api/Auth/refreshtoken",
@@ -22,7 +25,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/Auth/refreshtoken",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
     },
     {
       "DownstreamPathTemplate": "/api/Auth/send-mail",
@@ -34,7 +39,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/Auth/send-mail",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
     },
     {
       "DownstreamPathTemplate": "/api/Auth/reset-password",
@@ -46,7 +53,9 @@
         }
       ],
       "UpstreamPathTemplate": "/api/Auth/reset-password",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
     },
     {
       "DownstreamPathTemplate": "/api/Auth/sign-up",
@@ -58,7 +67,315 @@
         }
       ],
       "UpstreamPathTemplate": "/api/Auth/sign-up",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
+    },
+    /////////////////////////Social////////////////////////////
+    {
+      "DownstreamPathTemplate": "/api/v1/images",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/images",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts/{postId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts/{postId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts/users/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts/users/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts/deleted/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts/deleted/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts/suggestText",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts/suggestText",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts/{userId}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts/{postId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts/{postId}",
+      "UpstreamHttpMethod": [ "PATCH" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/posts/{postId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/posts/{postId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/likes/{postId}/{userLikeId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/likes/{postId}/{userLikeId}",
+      "UpstreamHttpMethod": [ "POST", "DELETE" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/comments/{postId}/{userCommentId}/{parentCommentId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/comments/{postId}/{userCommentId}/{parentCommentId}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/comments/{commentId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/comments/{commentId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/comments/post/{postId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Social/comments/post/{postId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "Social",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    /////////////////////////PT////////////////////////////
+    {
+      "DownstreamPathTemplate": "/api/v1/keys",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PT/keys",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "SwaggerKey": "PT",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/keys/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PT/keys/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "SwaggerKey": "PT",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/keys/random",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/PT/keys/random",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "PT",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Authentication",
+      "Config": [
+        {
+          "Name": "Authentication.API",
+          "Version": "1.0",
+          "Url": "http://localhost:44341/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Social",
+      "Config": [
+        {
+          "Name": "Location.API",
+          "Version": "1.0",
+          "Url": "http://localhost:44341/location/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "PT",
+      "Config": [
+        {
+          "Name": "Catalog.API",
+          "Version": "1.0",
+          "Url": "http://localhost:44341/pt/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }

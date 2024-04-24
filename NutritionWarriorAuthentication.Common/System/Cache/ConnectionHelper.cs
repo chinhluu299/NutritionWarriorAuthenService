@@ -12,8 +12,11 @@ namespace NutritionWarriorAuthentication.Application.System.Cache
     {
         static ConnectionHelper()
         {
+            //ConnectionHelper.lazyConnection = new Lazy<ConnectionMultiplexer>(() => {
+            //    return ConnectionMultiplexer.Connect(ConfigurationManager.AppSetting["RedisURL"]);
+            //});
             ConnectionHelper.lazyConnection = new Lazy<ConnectionMultiplexer>(() => {
-                return ConnectionMultiplexer.Connect(ConfigurationManager.AppSetting["RedisURL"]);
+                return ConnectionMultiplexer.Connect("127.0.0.1:6379");
             });
         }
         private static Lazy<ConnectionMultiplexer> lazyConnection;
