@@ -8,6 +8,7 @@ using NutritionWarriorAuthentication.Data.Entities;
 using NutritionWarriorAuthentication.ViewModel.System.Auth;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -17,7 +18,7 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
 {
     public class AuthService : IAuthService
     {
-
+        
         public readonly UserManager<AppUser> _userManager;
         public readonly RoleManager<AppRole> _roleManager;
         public readonly SignInManager<AppUser> _signInManager;
@@ -57,16 +58,16 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
                 var getClaims = _jwtService.GetPrincipalFromExpiredToken(accessToken);
                 if (getClaims == null)
                     return null;
-                var userId = getClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                var role = getClaims.FindFirst(ClaimTypes.Role)?.Value;
+                var userId = getClaims.FindFirst(JwtRegisteredClaimNames.Name)?.Value;
+                var role = getClaims.FindFirst("Role")?.Value;
 
                 int checkToken = _cacheService.GetData<int>(string.Format("token:{0}:{1}", userId, refreshToken));
 
                 if (checkToken == 1)
                 {
                     Claim[] claims = new[] {
-                        new Claim(ClaimTypes.NameIdentifier, userId),
-                        new Claim(ClaimTypes.Role, role),
+                        new Claim(JwtRegisteredClaimNames.Name, userId),
+                        new Claim("Role", role),
                     };
                     string token = _jwtService.Generate(claims);
                     return token;
@@ -117,8 +118,8 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
 
             Claim[] claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(JwtRegisteredClaimNames.Name, account.Id.ToString()),
+                new Claim("Role", role)
             };
 
             var accessToken = _jwtService.Generate(claims);
