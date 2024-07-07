@@ -1,0 +1,28 @@
+//---------------------------Main service (Nutrition & Workout)
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/foods/search/{food_name}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/foods/search/{food_name}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
+  }
+}

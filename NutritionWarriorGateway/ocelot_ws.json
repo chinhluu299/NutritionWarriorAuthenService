@@ -1,0 +1,17 @@
+{
+  "Routes": [
+    /////////////////////////Authentication////////////////////////////
+    {
+      "DownstreamPathTemplate": "/socket.io/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 2709
+        }
+      ],
+      "UpstreamPathTemplate": "/",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ]
+}

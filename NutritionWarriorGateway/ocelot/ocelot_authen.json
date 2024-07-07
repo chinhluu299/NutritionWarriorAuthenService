@@ -1,0 +1,123 @@
+//---------------------------Authentication
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/signin",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/signin",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/refreshtoken",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/refreshtoken",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/send-mail",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/send-mail",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/reset-password",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/reset-password",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/sign-up",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/sign-up",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/verify",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/verify",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/update/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Authentication",
+      "Config": [
+        {
+          "Name": "Authentication.API",
+          "Version": "1.0",
+          "Url": "http://localhost:44341/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:44341"
+  }
+}

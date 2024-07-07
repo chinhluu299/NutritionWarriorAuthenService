@@ -12,8 +12,8 @@ using NutritionWarriorAuthentication.Data.EF;
 namespace NutritionWarriorAuthentication.Data.Migrations
 {
     [DbContext(typeof(NWAuthenDbContext))]
-    [Migration("20240404152801_update_field")]
-    partial class update_field
+    [Migration("20240707045208_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,6 +149,29 @@ namespace NutritionWarriorAuthentication.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
+                            Description = "Administrator role",
+                            Name = "admin",
+                            NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("0fcbb353-ae6b-4936-9fdd-950efeb452a6"),
+                            Description = "User role",
+                            Name = "user",
+                            NormalizedName = "user"
+                        },
+                        new
+                        {
+                            Id = new Guid("09480504-4c27-4af7-a492-adcdbbe6c097"),
+                            Description = "VIP role",
+                            Name = "vip",
+                            NormalizedName = "vip"
+                        });
                 });
 
             modelBuilder.Entity("NutritionWarriorAuthentication.Data.Entities.AppUser", b =>

@@ -114,7 +114,16 @@ namespace NutritionWarriorAuthentication.Api.Controllers
                 return StatusCode(500, new { message = "Send code failure" , error=ex.Message});
             }
         }
+        [HttpPost("verify")]
+        public async Task<IActionResult> Verify([FromBody] string token)
+        {
+            try {
+                var claims = await _AuthService.Verify(token);
 
+                return StatusCode(200,  claims);
+            }
+            catch(Exception ex) { return StatusCode(400,new {message = "Token is invalid", error=ex.Message }); } 
+        }
 
 
         [HttpPost("reset-password")]
@@ -141,25 +150,25 @@ namespace NutritionWarriorAuthentication.Api.Controllers
             {
                 return StatusCode(500, new { message = "Reset password failure", error = ex.Message });
             }
-           
         }
 
-        [HttpPost("sign-up")]
+
+        [HttpPost("")]
         public async Task<IActionResult> SignUp([FromBody] RegisterRequest request)
         {
             try
             {
-               int result = await _AuthService.SignUp(request.Email, request.Password, request.Dob, request.Gender, request.FullName);
+               int result = await _AuthService.SignUp(request.email, request.password, request.phone_number, request.name);
                if(result == -1)
-                    return StatusCode(400, new { message = "Email has already been registered.", error = "Email has already been registered." });
+                    return StatusCode(400, new { message = "Email has already been registered.", success = false });
                if(result == 1)
-                    return Ok(new { message = "Account is registered successfully" });
+                    return Ok(new { message = "Account is registered successfully", success=true });
 
-                return StatusCode(400, new { message = "Cannot sign up account", error = "Unknow" });
+                return StatusCode(400, new { message = "Cannot sign up account", success = false });
             }
             catch(Exception ex)
             {
-                return StatusCode(500, new { message = "Cannot sign up account", error = ex.Message });
+                return StatusCode(500, new { success = false, message = ex.Message });
             }
         }
     }

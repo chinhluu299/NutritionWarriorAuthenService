@@ -2,6 +2,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
@@ -21,7 +22,8 @@ namespace NutritionWarriorGateway
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
-                .AddJsonFile("ocelot.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("ocelot/ocelot_authen.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("ocelot/ocelot_main.json", optional : true, reloadOnChange: true)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             builder.Services.AddControllers();
@@ -99,9 +101,18 @@ namespace NutritionWarriorGateway
                 });
                 endpoints.MapSwagger();
             });
-            app.UseSwagger();
-            app.UseSwaggerForOcelotUI();
+
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
+            //});
+            app.UseWebSockets();
             app.UseOcelot().Wait();
+            //app.UseSwaggerForOcelotUI(opt =>
+            //{
+            //    opt.PathToSwaggerGenerator = "/swagger/docs";
+            //});
             app.MapGet("/", () => "Gate way ok");
             app.Run();
         }

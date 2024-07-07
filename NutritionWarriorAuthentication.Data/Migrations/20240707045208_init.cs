@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace NutritionWarriorAuthentication.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Database : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -125,6 +127,16 @@ namespace NutritionWarriorAuthentication.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUserTokens", x => x.UserId);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AppRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("09480504-4c27-4af7-a492-adcdbbe6c097"), null, "VIP role", "vip", "vip" },
+                    { new Guid("0fcbb353-ae6b-4936-9fdd-950efeb452a6"), null, "User role", "user", "user" },
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), null, "Administrator role", "admin", "admin" }
                 });
         }
 

@@ -13,7 +13,7 @@
       "UpstreamPathTemplate": "/api/Auth/signin",
       "UpstreamHttpMethod": [ "POST" ],
       "SwaggerKey": "Authentication"
-      
+
     },
     {
       "DownstreamPathTemplate": "/api/Auth/refreshtoken",
@@ -71,6 +71,19 @@
       "SwaggerKey": "Authentication"
 
     },
+    {
+      "DownstreamPathTemplate": "/api/Auth/verify",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44375
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Auth/verify",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Authentication"
+    },
     /////////////////////////Social////////////////////////////
     {
       "DownstreamPathTemplate": "/api/v1/images",
@@ -112,7 +125,7 @@
       "AddHeadersToRequest": {
         "claims_name": "Claims[name] > value > |",
         "claims_role": "Claims[Role] > value > |"
-      },
+      }
 
     },
     {
@@ -409,38 +422,6 @@
         "claims_name": "Claims[name] > value > |",
         "claims_role": "Claims[Role] > value > |"
       }
-    }
-  ],
-  "SwaggerEndPoints": [
-    {
-      "Key": "Authentication",
-      "Config": [
-        {
-          "Name": "Authentication.API",
-          "Version": "1.0",
-          "Url": "http://localhost:44341/swagger/v1/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "Social",
-      "Config": [
-        {
-          "Name": "Location.API",
-          "Version": "1.0",
-          "Url": "http://localhost:44341/location/swagger/v1/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "PT",
-      "Config": [
-        {
-          "Name": "Catalog.API",
-          "Version": "1.0",
-          "Url": "http://localhost:44341/pt/swagger/v1/swagger.json"
-        }
-      ]
     }
   ]
 }

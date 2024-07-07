@@ -81,6 +81,11 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
             
         }
 
+        public async Task<ClaimsPrincipal> Verify(string token)
+        {
+            return _jwtService.Verify(token);
+        }
+
         public async Task<int> ResetPassword(string email, string confirmCode, string newPassword)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -151,15 +156,14 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
             return true;
         }
 
-        public async Task<int> SignUp(string email, string password, DateTime dob, int gender, string fullname)
+        public async Task<int> SignUp(string email, string password, string phone, string fullname)
         {
             if (await _userManager.FindByEmailAsync(email) != null)
                 return -1;
             AppUser user = new AppUser()
             {
                 Email = email,
-                Dob = dob,
-                Gender = gender,
+                PhoneNumber = phone,
                 DisplayName = fullname,
                 UserName = email,
 
