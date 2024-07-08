@@ -6,6 +6,7 @@ using NutritionWarriorAuthentication.ViewModel.System.Auth;
 using System.Net.Mail;
 using System.Net;
 using NutritionWarriorAuthentication.Data.EF;
+using NutritionWarriorAuthentication.Api.Queues;
 
 namespace NutritionWarriorAuthentication.Api.Controllers
 {
@@ -27,17 +28,14 @@ namespace NutritionWarriorAuthentication.Api.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("signin")]
+        [HttpPost("login")]
         public async Task<ActionResult> SignIn([FromBody] LoginRequest request)
         {
             try
             {
                 var login = await _AuthService.SignIn(request.Email, request.Password);
 
-                if (login == null)
-                    return BadRequest("Login failed");
-
-                return Ok(login);
+                return Ok( new { login });
             }
             catch (Exception ex)
             {
@@ -126,7 +124,7 @@ namespace NutritionWarriorAuthentication.Api.Controllers
         }
 
 
-        [HttpPost("reset-password")]
+        [HttpPost("change-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
             try
@@ -158,11 +156,15 @@ namespace NutritionWarriorAuthentication.Api.Controllers
         {
             try
             {
-               int result = await _AuthService.SignUp(request.email, request.password, request.phone_number, request.name);
-               if(result == -1)
+               string result = await _AuthService.SignUp(request.email, request.password, request.phone_number, request.name);
+               if(result == "-1")
                     return StatusCode(400, new { message = "Email has already been registered.", success = false });
-               if(result == 1)
-                    return Ok(new { message = "Account is registered successfully", success=true });
+               if(result != "0")
+                {
+                    Send.CreateUser(result,request.email, request.phone_number, request.name);
+                    return Ok(new { message = "Account is registered successfully", success = true });
+                }
+                    
 
                 return StatusCode(400, new { message = "Cannot sign up account", success = false });
             }

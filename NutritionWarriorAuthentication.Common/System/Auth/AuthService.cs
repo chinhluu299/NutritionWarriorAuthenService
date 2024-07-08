@@ -58,7 +58,8 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
                 var getClaims = _jwtService.GetPrincipalFromExpiredToken(accessToken);
                 if (getClaims == null)
                     return null;
-                var userId = getClaims.FindFirst(JwtRegisteredClaimNames.Name)?.Value;
+                var userId = getClaims.FindFirst(JwtRegisteredClaimNames.NameId)?.Value;
+                var email = getClaims.FindFirst(JwtRegisteredClaimNames.Name)?.Value;
                 var role = getClaims.FindFirst("Role")?.Value;
 
                 int checkToken = _cacheService.GetData<int>(string.Format("token:{0}:{1}", userId, refreshToken));
@@ -66,7 +67,8 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
                 if (checkToken == 1)
                 {
                     Claim[] claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Name, userId),
+                        new Claim(JwtRegisteredClaimNames.NameId, userId),
+                        new Claim(JwtRegisteredClaimNames.Name, email),
                         new Claim("Role", role),
                     };
                     string token = _jwtService.Generate(claims);
@@ -113,9 +115,9 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
         public async Task<object> SignIn(string email, string password)
         {
             var account = await _userManager.FindByEmailAsync(email);
-            if (account == null) return null;
+            if (account == null) return new { success=false, message="Account not found" };
             var checkLogin = await _userManager.CheckPasswordAsync(account, password);
-            if (checkLogin == false) return null;
+            if (checkLogin == false) return new { success = false, message = "Password is incorrect" };
 
             var roleL = await _userManager.GetRolesAsync(account);
 
@@ -123,7 +125,8 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
 
             Claim[] claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Name, account.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.NameId, account.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Name, account.Email.ToString()),
                 new Claim("Role", role)
             };
 
@@ -138,12 +141,17 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
             if(saveResult)
                 return new
                 {
-                    accessToken = accessToken,
-                    refreshToken = refreshToken
+                    success = true,
+                    data= new {
+                        accessToken = accessToken,
+                        refreshToken = refreshToken,
+                        id= account.Id
+                    }
+                
                 };
             else
             {
-                return null;
+                return new { success = false, message = "Account not found" };
             }
         }
 
@@ -156,10 +164,10 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
             return true;
         }
 
-        public async Task<int> SignUp(string email, string password, string phone, string fullname)
+        public async Task<string> SignUp(string email, string password, string phone, string fullname)
         {
             if (await _userManager.FindByEmailAsync(email) != null)
-                return -1;
+                return "-1";
             AppUser user = new AppUser()
             {
                 Email = email,
@@ -173,11 +181,12 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
             {
                 var newUser = await _userManager.FindByEmailAsync(email);
                 await _userManager.AddToRoleAsync(newUser, "User");
-                return 1;
+                
+                return newUser.Id.ToString();
             }
 
 
-            return 0;
+            return "0";
             
         }
     }

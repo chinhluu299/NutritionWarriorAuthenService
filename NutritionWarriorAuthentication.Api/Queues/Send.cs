@@ -1,44 +1,58 @@
 ﻿using RabbitMQ.Client;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace NutritionWarriorAuthentication.Api.Queues
 {
     public static class Send
     {
-        public static void CreateUser(Object data)
+        public static void CreateUser(string id, string email, string phone_number, string name)
         {
-            var factory = new ConnectionFactory()
-            {
-                HostName = "localhost", // Thay đổi thành địa chỉ RabbitMQ server của bạn nếu cần
-                UserName = "guest",
-                Password = "guest"
-            };
+           
+            string queueName = "create_user_queue";
+            string queueName2 = "update_user_queue";
+            var factory = new ConnectionFactory() { Uri =new Uri("amqps://vqhjbecl:HbrY80nH1aBsmJ8oyFBsf43TeY5NM3Za@turkey.rmq.cloudamqp.com/vqhjbecl") };
 
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                // Đảm bảo queue tồn tại trước khi publish message
-                channel.QueueDeclare(queue: "create_user_queue",
-                                     durable: false,
+                channel.QueueDeclare(queue: queueName,
+                                     durable: true,
                                      exclusive: false,
                                      autoDelete: false,
                                      arguments: null);
 
-                // Tạo message
-                string message = "Thông tin tạo user"; // Thay đổi thông tin message tùy theo yêu cầu của bạn
-                var body = Encoding.UTF8.GetBytes(message);
+                var message = new
+                {
+                    id = id,
+                    email = email,
+                    phone_number = phone_number,
+                    name = name
+                };
+                var message2 = new
+                {
+                    id = id,
+                    email = email,
+                    name = name,
+                    image = ""
+                };
 
-                // Publish message vào queue
+                // Chuyển đổi dữ liệu sang dạng byte để gửi lên queue
+                var body = Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(message));
+                var body2 = Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(message2));
+                // Đẩy message vào queue
                 channel.BasicPublish(exchange: "",
-                                     routingKey: "create_user_queue",
+                                     routingKey: queueName,
                                      basicProperties: null,
                                      body: body);
 
-                Console.WriteLine($"Đã gửi message: {message}");
-            }
+                channel.BasicPublish(exchange: "",
+                                     routingKey: queueName2,
+                                     basicProperties: null,
+                                     body: body2);
 
-            Console.WriteLine("Nhấn phím bất kỳ để thoát.");
-            Console.ReadLine();
+                Console.WriteLine($"[x] Sent message: {message}");
+            }
 
         }
     }

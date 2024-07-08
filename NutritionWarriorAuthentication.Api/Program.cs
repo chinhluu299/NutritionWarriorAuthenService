@@ -106,6 +106,15 @@ namespace NutritionWarriorAuthentication.Api
 
 
             app.MapControllers();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Service OK");
+                });
+            });
 
             app.Run();
         }

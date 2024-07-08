@@ -16,7 +16,7 @@ namespace NutritionWarriorAuthentication.Application.System.Auth
         Task<string> CreateConfirmCode(Guid userId);
         Task<bool> SignOut(string userId, string refreshToken);
         Task<int> ResetPassword(string userId, string confirmCode, string newPassword);
-        Task<int> SignUp(string email, string password, string phone, string fullname);
+        Task<string> SignUp(string email, string password, string phone, string fullname);
         Task<ClaimsPrincipal> Verify(string token);
     }
 }

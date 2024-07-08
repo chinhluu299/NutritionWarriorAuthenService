@@ -12,10 +12,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["NutritionWarriorAuthentication.Api/NutritionWarriorAuthentication.Api.csproj", "NutritionWarriorAuthentication.Api/"]
-COPY ["NutritionWarriorAuthentication.Common/NutritionWarriorAuthentication.Application.csproj", "NutritionWarriorAuthentication.Common/"]
-COPY ["NutritionWarriorAuthentication.Data/NutritionWarriorAuthentication.Data.csproj", "NutritionWarriorAuthentication.Data/"]
-COPY ["NutritionWarriorAuthentication.ViewModel/NutritionWarriorAuthentication.ViewModel.csproj", "NutritionWarriorAuthentication.ViewModel/"]
-RUN dotnet restore "./NutritionWarriorAuthentication.Api/NutritionWarriorAuthentication.Api.csproj"
+RUN dotnet restore "./NutritionWarriorAuthentication.Api/./NutritionWarriorAuthentication.Api.csproj"
 COPY . .
 WORKDIR "/src/NutritionWarriorAuthentication.Api"
 RUN dotnet build "./NutritionWarriorAuthentication.Api.csproj" -c %BUILD_CONFIGURATION% -o /app/build

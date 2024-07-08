@@ -16,7 +16,7 @@ namespace NutritionWarriorAuthentication.Application.System.Cache
             //    return ConnectionMultiplexer.Connect(ConfigurationManager.AppSetting["RedisURL"]);
             //});
             ConnectionHelper.lazyConnection = new Lazy<ConnectionMultiplexer>(() => {
-                return ConnectionMultiplexer.Connect("127.0.0.1:6379");
+                return ConnectionMultiplexer.Connect("redis-19734.c56.east-us.azure.redns.redis-cloud.com:19734,password=dXZtWYpaSKpnFBMeVk5i8nWRp7QXnjp9");
             });
         }
         private static Lazy<ConnectionMultiplexer> lazyConnection;
