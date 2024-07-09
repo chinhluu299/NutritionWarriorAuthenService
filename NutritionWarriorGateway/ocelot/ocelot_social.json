@@ -1,0 +1,207 @@
+{
+  "Routes": [
+    //user
+    {
+      "DownstreamPathTemplate": "/api/v1/user/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/user/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/user/follow/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/user/follow/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/user/follow",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/user/follow",
+      "UpstreamHttpMethod": [ "POST", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/user/friend",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/user/friend",
+      "UpstreamHttpMethod": [ "POST", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    //story
+    {
+      "DownstreamPathTemplate": "/api/v1/story/seek",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/story/seek",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/story/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/story/user",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/story/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/story/",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/seek/add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/seek/add",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/seek/comment",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/seek/comment",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    //image
+    {
+      "DownstreamPathTemplate": "/{filename}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/image/{filename}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    }
+  ]
+}

@@ -83,26 +83,6 @@
       "UpstreamPathTemplate": "/api/auth/verify",
       "UpstreamHttpMethod": [ "POST" ],
       "SwaggerKey": "Authentication"
-    },
-    {
-      "DownstreamPathTemplate": "/api/auth/update/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 8000
-        }
-      ],
-      "UpstreamPathTemplate": "/api/auth/{id}",
-      "UpstreamHttpMethod": [ "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "AddHeadersToRequest": {
-        "claims_name": "Claims[name] > value > |",
-        "claims_role": "Claims[Role] > value > |"
-      }
     }
   ],
   "SwaggerEndPoints": [
@@ -116,8 +96,5 @@
         }
       ]
     }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:44341"
-  }
+  ]
 }

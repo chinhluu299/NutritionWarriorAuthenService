@@ -1,6 +1,68 @@
 //---------------------------Main service (Nutrition & Workout)
 {
   "Routes": [
+    //user
+    {
+      "DownstreamPathTemplate": "/api/auth/update/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/updatehw/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/updatehw/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/{email}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/auth/{email}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    //food
     {
       "DownstreamPathTemplate": "/api/foods/search/{food_name}",
       "DownstreamScheme": "http",
@@ -11,6 +73,349 @@
         }
       ],
       "UpstreamPathTemplate": "/api/foods/search/{food_name}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/foods/random",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/foods/random",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    //daily-logs
+    {
+      "DownstreamPathTemplate": "/api/daily-logs/add-food/{user_id}/{date}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/daily-logs/add-food/{user_id}/{date}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    //exercises
+    {
+      "DownstreamPathTemplate": "/api/exercises/add-exercise-to-daily-log/<user_id>",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/add-exercise-to-daily-log/<user_id>",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-body-part-list/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-body-part-list/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-exercises-for-body-part/{body_part}/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-exercises-for-body-part/{body_part}/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-equipment-list/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-equipment-list/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-target-list/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-target-list/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-exercises-by-equipment/{equipment_type}/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-exercises-by-equipment/{equipment_type}/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-exercises-by-target/{target_muscle}/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-exercises-by-target/{target_muscle}/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-exercises-by-name/{exercise_name}/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-exercises-by-name/{exercise_name}/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/exercises/get-all-exercises/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/exercises/get-all-exercises/",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    //macro
+    {
+      "DownstreamPathTemplate": "/api/macro/calculate-expenditure/method-1",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/macro/calculate-expenditure/method-1",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/macro/calculate-expenditure/method-2/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/macro/calculate-expenditure/method-2/{id}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/macro/re-calculate-expenditure/method-2/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/macro/re-calculate-expenditure/method-2/{id}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/macro/re-calculate-expenditure/method-2/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/macro/re-calculate-expenditure/method-2/{id}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/macro/calculate-macros",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/macro/calculate-macros",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/macro/update-expenditure/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/macro/update-expenditure/{id}",
       "UpstreamHttpMethod": [ "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -20,9 +425,27 @@
         "claims_name": "Claims[name] > value > |",
         "claims_role": "Claims[Role] > value > |"
       }
+    },
+    //tips
+    {
+      "DownstreamPathTemplate": "/api/tips/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/macro/update-expenditure/{id}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "claims_name": "Claims[name] > value > |",
+        "claims_role": "Claims[Role] > value > |"
+      }
     }
-  ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000"
-  }
+  ]
 }
